@@ -47,7 +47,7 @@ const Collection = () => {
 
     const sdk = new ThirdwebSDK(
       provider.getSigner(),
-      'https://eth-rinkeby.alchemyapi.io/v2/SM9aaPdeGHo61RzHDyDYpqxiwrNr8O2g'
+      process.env.REACT_APP_GET_SIGNER
     )
     return sdk.getNFTModule(collectionId)
   }, [provider])
@@ -67,10 +67,10 @@ const Collection = () => {
 
     const sdk = new ThirdwebSDK(
       provider.getSigner(),
-      'https://eth-rinkeby.alchemyapi.io/v2/SM9aaPdeGHo61RzHDyDYpqxiwrNr8O2g'
+      process.env.REACT_APP_GET_SIGNER
     )
     return sdk.getMarketplaceModule(
-      '0xf2b7beFeAf50147248F37Cb5d28073d014E4ccfc'
+      process.env.REACT_APP_GET_MARKETPLACE_MODULE
     )
   }, [provider])
 
@@ -83,7 +83,7 @@ const Collection = () => {
   }, [marketPlaceModule])
 
   const fetchCollectionData = async (sanityClient = client) => {
-    const query = `*[_type == "marketItems" && contractAddress == "0x650Cb7ceE7B983509e45f16c2021b8bB8b901273" ] {
+    const query = `*[_type == "marketItems" && contractAddress == ${process.env.REACT_APP_CONTRACT_ADDRESS} ] {
         "imageUrl": profileImage.asset->url,
         "bannerImageUrl": bannerImage.asset->url,
         volumeTraded,
